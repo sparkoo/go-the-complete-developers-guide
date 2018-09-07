@@ -1,6 +1,8 @@
 package main
 
 func main() {
+	deckFile := "my_deck.data"
+
 	cards := newDeck()
 
 	hand, _ := deal(cards, 5)
@@ -9,8 +11,8 @@ func main() {
 	//hand.print()
 
 	hand.print()
-	hand.saveToFile("hand_deck")
+	hand.saveToFile(deckFile)
 
-	loadedDeck := newDeckFromFile("hand_deck")
+	loadedDeck := newDeckFromFile(deckFile)
 	loadedDeck.print()
 }
