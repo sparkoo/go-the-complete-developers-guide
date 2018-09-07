@@ -11,6 +11,6 @@ func main() {
 	hand.print()
 	hand.saveToFile("hand_deck")
 
-	loadedDeck, _ := loadFromFile("hand_deck")
+	loadedDeck := newDeckFromFile("hand_deck")
 	loadedDeck.print()
 }
