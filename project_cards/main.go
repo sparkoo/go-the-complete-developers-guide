@@ -15,4 +15,7 @@ func main() {
 
 	loadedDeck := newDeckFromFile(deckFile)
 	loadedDeck.print()
+
+	loadedDeck.shuffle()
+	loadedDeck.print()
 }
