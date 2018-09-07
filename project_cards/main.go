@@ -2,5 +2,9 @@ package main
 
 func main() {
 	cards := newDeck()
-	cards.print()
+
+	hand, remainingDeck := deal(cards, 5)
+
+	remainingDeck.print()
+	hand.print()
 }
