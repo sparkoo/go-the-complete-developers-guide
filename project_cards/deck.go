@@ -37,6 +37,12 @@ func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0600)
 }
 
+func loadFromFile(filename string) (deck, error) {
+	fileContent, e := ioutil.ReadFile(filename)
+	deckFromFile := deck(strings.Split(string(fileContent), ","))
+	return deckFromFile, e
+}
+
 func (d deck) toString() string {
 	return strings.Join(d, ",")
 }
