@@ -15,20 +15,23 @@ type contactInfo struct {
 
 func main() {
 	john := person{"John", "Doe", contactInfo{"john@doe", 123456}}
-	fmt.Println(john)
+	john.print()
 
 	alex := person{
 		firstName: "Alex",
 		lastName:  "Anderson",
 		contact:   contactInfo{email: "alex@anderson", zip: 123456}}
-	fmt.Println(alex)
+	alex.print()
 
 	var jane person
-	fmt.Println(jane)
-	fmt.Printf("%+v\n", jane)
+	jane.print()
 	jane.firstName = "Jane"
 	jane.lastName = "Doe"
 	jane.contact.email = "jane@doe"
 	jane.contact.zip = 123456
-	fmt.Printf("%+v\n", jane)
+	jane.print()
+}
+
+func (p person) print() {
+	fmt.Printf("%+v\n", p)
 }
