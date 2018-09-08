@@ -30,8 +30,22 @@ func main() {
 	jane.contact.email = "jane@doe"
 	jane.contact.zip = 123456
 	jane.print()
+
+	jane.updateName("Jasmine")
+	jane.print()
+
+	jane.updateNamePointer("Jasmine")
+	jane.print()
 }
 
 func (p person) print() {
 	fmt.Printf("%+v\n", p)
+}
+
+func (p person) updateName(newFirstName string) {
+	p.firstName = newFirstName
+}
+
+func (p *person) updateNamePointer(newFirstName string) {
+	p.firstName = newFirstName
 }
