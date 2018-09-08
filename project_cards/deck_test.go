@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"reflect"
+	"testing"
+)
 
 func TestNewDeck(t *testing.T) {
 	d := newDeck()
@@ -16,4 +20,21 @@ func TestNewDeck(t *testing.T) {
 	if d[len(d) - 1] != "King of Clubs" {
 		t.Errorf("Expected last card to be King of Clubs, but got [%v]", d[len(d) - 1])
 	}
+}
+
+func TestSaveToFileAndNewDeckFromFile(t *testing.T) {
+	testFile := "_decktesting"
+
+	os.Remove(testFile)
+
+	d := newDeck()
+	d.saveToFile(testFile)
+
+	loadedDeck := newDeckFromFile(testFile)
+
+	if !reflect.DeepEqual(d, loadedDeck) {
+		t.Errorf("Expected new and loaded decks to be same")
+	}
+
+	os.Remove(testFile)
 }
