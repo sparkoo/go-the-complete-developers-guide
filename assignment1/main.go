@@ -10,7 +10,7 @@ func main() {
 
 	for no := range numbers {
 		if no % 2 == 0 {
-			fmt.Println(no, " is even")
+			fmt.Println(no, "is even")
 		} else {
 			fmt.Println(no, "is odd")
 		}
