@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+type logWriter struct{}
+
 func main() {
 	res, err := http.Get("http://google.com")
 	if err != nil {
@@ -29,9 +31,19 @@ func main() {
 	fmt.Println(string(content))
 	res.Body.Close()
 
-
 	fmt.Println()
 
 	res, err = http.Get("http://google.com")
 	io.Copy(os.Stdout, res.Body)
+
+	fmt.Println()
+
+	res, err = http.Get("http://google.com")
+	io.Copy(logWriter{}, res.Body)
+}
+
+func (logWriter) Write(p []byte) (n int, err error) {
+	fmt.Println("my writer:", string(p))
+	fmt.Println("just wrote", len(p), "bytes")
+	return len(p), nil
 }
