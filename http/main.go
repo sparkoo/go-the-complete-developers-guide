@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 )
 
 func main() {
-	res, err := http.Get("http://seznam.cz")
+	res, err := http.Get("http://google.com")
 	if err != nil {
 		fmt.Println("Error: ", err)
 		os.Exit(1)
@@ -27,4 +28,10 @@ func main() {
 	}
 	fmt.Println(string(content))
 	res.Body.Close()
+
+
+	fmt.Println()
+
+	res, err = http.Get("http://google.com")
+	io.Copy(os.Stdout, res.Body)
 }
