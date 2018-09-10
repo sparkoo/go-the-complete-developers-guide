@@ -22,20 +22,18 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	var message string
-	message = <-c
-	fmt.Println(message)
-	fmt.Println(<-c)
+	for i := 0; i < len(links); i++ {
+		fmt.Println(<-c)
+	}
 }
 
 func checkLink(link string, c chan string) {
-	_, err := http.Get(link)
+	res, err := http.Get(link)
 	if err != nil {
 		fmt.Println(link, "is off!")
-		c <- "err"
+		c <- err.Error()
 		return
 	}
-
 	fmt.Println(link, "is on")
-	c <- "done"
+	c <- res.Status
 }
