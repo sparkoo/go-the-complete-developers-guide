@@ -16,16 +16,16 @@ func main() {
 		"http://blabol.czf",
 	}
 	for _, link := range links {
-		checkLink(link)
+		go checkLink(link)
 	}
 }
 
-func checkLink(link string)  {
+func checkLink(link string) {
 	_, err := http.Get(link)
 	if err != nil {
 		fmt.Println(link, "is off!")
 		return
 	}
 
-	fmt.Println(link, "is on!")
+	fmt.Println(link, "is on")
 }
