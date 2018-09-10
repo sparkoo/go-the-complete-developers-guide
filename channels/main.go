@@ -15,17 +15,27 @@ func main() {
 		"http://sparko.cz",
 		"http://blabol.czf",
 	}
+
+	c := make(chan string)
+
 	for _, link := range links {
-		go checkLink(link)
+		go checkLink(link, c)
 	}
+
+	var message string
+	message = <-c
+	fmt.Println(message)
+	fmt.Println(<-c)
 }
 
-func checkLink(link string) {
+func checkLink(link string, c chan string) {
 	_, err := http.Get(link)
 	if err != nil {
 		fmt.Println(link, "is off!")
+		c <- "err"
 		return
 	}
 
 	fmt.Println(link, "is on")
+	c <- "done"
 }
