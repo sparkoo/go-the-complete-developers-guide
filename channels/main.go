@@ -3,17 +3,18 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
 	links := []string{
-		//"http://google.com",
+		"http://google.com",
 		"http://facebook.com",
-		//"http://seznam.cz",
+		"http://seznam.cz",
 		"http://golang.com",
-		//"http://stackoverflow.com",
-		//"http://sparko.cz",
-		//"http://blabol.czf",
+		"http://stackoverflow.com",
+		"http://sparko.cz",
+		"http://blabol.czf",
 	}
 
 	c := make(chan string)
@@ -22,8 +23,11 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	for l := range c{
-		go checkLink(l, c)
+	for l := range c {
+		go func(link string) {
+			time.Sleep(5 * time.Second)
+			checkLink(link, c)
+		}(l)
 	}
 }
 
